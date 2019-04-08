@@ -1,0 +1,17 @@
+name: acutetv
+version: 0.1.0
+
+authors:
+  - applesaucyy <applesaucy@yandex.com>
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    
+targets:
+  acutetv:
+    main: src/acutetv.cr
+
+crystal: 0.27.2
+
+license: MIT
