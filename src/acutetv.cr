@@ -1,7 +1,11 @@
 require "kemal"
+require "ecr"
+require "file_utils"
+require "markdown"
 
 get "/" do
-	render "public/main.ecr"
+    v_list = Dir.children("public/videos")
+    render "public/main.ecr"
 end
 
 Kemal.run
