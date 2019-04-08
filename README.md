@@ -1,6 +1,6 @@
 # acutetv
 
-TODO: Write a description here
+dumb synchronized video stream
 
 ## Installation
 
@@ -24,4 +24,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [your-name-here](https://github.com/your-github-user) - creator and maintainer
+- [applesaucy](https://github.com/applesaucyy) - creator and maintainer
