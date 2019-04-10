@@ -1,153 +1,8 @@
 <html>
-    <style>
-        body {
-            background-color: #F2E5BF;
-            min-width: 1000px;
-            width: auto !important;
-            width: 1000px;
-        }
-        .cute_content {
-            max-width: 1000px;
-            margin: auto;
-            background: none;
-            border: 2px dotted #000;
-            border-radius: 20px;
-            padding: 20px;
-        }
-        .cute_content #logo{
-            width: 23%;
-            display: block;
-            margin: auto;
-        }
-        .cute_content #cute_nav {
-            background-color: #BFCBF1;
-            border: 2px dotted #000;
-            box-shadow: 3px 3px 0px #000;
-            margin: auto;
-            margin-bottom: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-        .cute_content #cute_nav a {
-            float: left;
-            color: #000;
-            text-align: center;
-            padding: 10px;
-            text-decoration: none;            
-        }
-        .cute_content #cute_nav a:hover {
-            background-color: #f1c0cc;      
-        }
-        .cute_content #cute_nav a.active {
-            background-color: #84ccdc;
-            text-decoration: underline;      
-        }
-        .cute_content #cute_nav #cute_nav_c a{
-            float: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); 
-        }
-        .cute_content #cute_nav #cute_nav_r {
-            float: right;
-        }
-        .cute_content #video_con{
-            display: inherit;
-            border: 2px solid;
-            box-shadow: 3px 3px 0px #000;
-        }
-        .cute_content #sch_con{
-            background-color: #BFCBF1;
-            display: inherit;
-            text-align: center;
-            color: #000;
-            margin-top: 10px;
-            table-layout: fixed;
-            width: 100%;
-            border: 2px dotted #000;
-            box-shadow: 3px 3px 0px #000;
-        }
-        .cute_content #sch_title {
-            background-color: #f1c0cc;
-            margin: auto;
-            margin-top: 10px;
-            width: max-content;
-            padding: 10px;
-            border: 2px dotted #000;
-            box-shadow: 3px 3px 0px #000;
-        }
-        .cute_content #sch_con th, td{
-            width: 200px;
-        }
-        
-        .cute_content #vj_info {
-            margin-top: 15px;
-            display: flex;
-        }
-        .cute_content #c_vj_avi {
-            height: 270px;
-            border: 2px solid #000;
-            box-shadow: 3px 3px 0px #000;
-            overflow: hidden;
-        }
-        .cute_content #vj_name{
-            background-color: #BFCBF1;
-            width: max-content;
-            text-align: center;
-            display: inherit;
-            margin-left: 10px;
-            margin-top: 10%;
-            border: 2px dotted #000;
-            height: min-content;
-            box-shadow: 3px 3px 0px #000;
-        }
-         .cute_content #vj_name h2{
-            margin: 0;
-        }
-         .cute_content #vj_name th, td{
-            width: 200px;
-        }
-         .cute_content #site_news{
-            width: 50%;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            border: 2px dotted #000;
-            margin-left: 10px;
-            box-shadow: 3px 3px 0px #000;
-            text-align: center;
-        }
-        .cute_content #site_news #n_post_con{
-            width: 100%;
-            display: inline;
-        }
-         .cute_content #site_news #n_post_con .n_post{
-            margin: 10px;
-            padding: 10px;
-            width: 400px;
-            display: block;
-            border: 2px dotted;
-            box-shadow: 3px 3px 0px #000;
-        }
-        .cute_content #site_news #n_post_con .n_post td{
-            width: 100%
-         }
-         
-         @media screen and (max-width: 600px) {
-            .cute_content #cute_nav a, .cute_content #cute_nav #cute_nav_r {
-                float: none;
-                display: block;
-            }           
-
-            .cute_content #cute_nav #cute_nav_c a {
-                position: relative;
-                top: 0;
-                left: 0;
-                transform: none;
-            }
-        }
-    </style>
     <head>
+        <link href="css/cute_basic.css?version=6" rel="stylesheet" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>/a/cute.tv</title>
     </head>
     <body>
@@ -162,9 +17,33 @@
                 <a href="/about">About</a>
             <div id="cute_nav_r">
                 <a href="https://github.com/applesaucyy/acutetv" target="_blank">Repo</a>
-                <a href="">Sign In</a>
+                <button onclick="document.getElementById('cute_login').style.display='block'" style="width:auto;">Sign In</button>
             </div>
         </div>
+        <div id="cute_login" class="modal">
+            <div class="cute_login_c">
+                <h4>**ACCOUNTS ARE MADE BY THE ADMIN ONLY. PASSWORDS ARE CHANGED AND RECOVERED MANUALLY. FOR EITHER OF THESE INQUIRIES, CONTACT THE ADMIN. YOU SHOULD ALREADY HAVE THEIR INFORMATION**</h4>
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+        
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        </div>
+        <script>
+        // Get the modal
+        var modal = document.getElementById('cute_login');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+            modal.style.display = "none";
+            }
+        }
+        </script>
         <video id="video_con" width="100%" controls>
                 <source src=<%= "videos/"+ v_list[0] %> type="video/webm">
                 Your browser does not support the video tag.
