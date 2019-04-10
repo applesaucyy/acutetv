@@ -4,15 +4,16 @@ dumb synchronized video stream
 
 ## Installation
 
-TODO: Write installation instructions here
-
-## Usage
-
-TODO: Write usage instructions here
+It _may or may not_ need ffmpeg, but otherwise the dependencies are in the shard.yml file.
+simply run:
+```
+crystal build --release src/acutetv.cr && ./acutetv
+```
+and bada bing bada boom the shit should run!
 
 ## Development
 
-TODO: Write development instructions here
+I need all the help i can get. I suck at this.
 
 ## Contributing
 
