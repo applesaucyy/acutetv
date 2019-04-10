@@ -1,4 +1,4 @@
-# acutetv
+# a-cute.tv
 
 dumb synchronized video stream
 
