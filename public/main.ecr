@@ -22,7 +22,7 @@
         <video id="video_con" width="1280" height="720"></video>
         <script>
 			window.onload = function() {
-			var ws = new WebSocket("ws://" + location.host + "/");
+			var ws = new WebSocket("wss://" + location.host + "/");
             var vid = document.getElementById('video_con');
             var vc = <%=current_video%>;
             var vidlist = [
