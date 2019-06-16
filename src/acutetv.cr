@@ -1,4 +1,10 @@
 require "kemal"
+<<<<<<< HEAD
+=======
+require "ecr"
+require "file_utils"
+require "markdown"
+>>>>>>> 52ca908fe589b25d4348485d9bb016aa6573b457
 
 SOCKETS = [] of HTTP::WebSocket
 server_stime = Time.now
@@ -8,12 +14,21 @@ video_duration = [] of String
 playlist_duration = 0
 	
 Dir.children("public/videos").sort.each do |e|
+<<<<<<< HEAD
 	video_list << "videos/#{e}"
 end
 
 video_list.shuffle!
 video_list.each do |v|
 	video_duration << `printf %.2f $(ffprobe -i "public/#{v}" -show_entries format=duration -v quiet -of csv="p=0")`.to_f.to_s
+=======
+	video_list.concat(["videos/#{e}"])
+end
+video_list.shuffle!
+    
+video_list.each do |v|
+	video_duration.concat([`printf %.2f $(ffprobe -i "public/#{v}" -show_entries format=duration -v quiet -of csv="p=0")`.to_f.to_s])
+>>>>>>> 52ca908fe589b25d4348485d9bb016aa6573b457
 end
 
 video_duration.each do |vd|
@@ -46,7 +61,11 @@ get "/" do
     render "public/main.ecr"
 end
 
+<<<<<<< HEAD
 ws "/video" do |socket|
+=======
+ws "/" do |socket|
+>>>>>>> 52ca908fe589b25d4348485d9bb016aa6573b457
   SOCKETS << socket
   
   socket.on_message do |message|

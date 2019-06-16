@@ -19,6 +19,7 @@
                 <a href="https://github.com/applesaucyy/acutetv" target="_blank">Repo</a>
             </div>
         </div>
+<<<<<<< HEAD
         <video id="video_con" width="1280" height="720" poster="loading.png" playsinline></video>
         
         <button onclick="togglePlay()" type="button">Play/Pause</button><br> 
@@ -40,11 +41,36 @@
 			window.onload = function() {
 			var ws = new WebSocket("ws://" + location.host + "/video");
             var vid = document.getElementById('video_con');
+=======
+        <video id="video_con" width="1280" height="720"></video>
+        <script>
+			window.onload = function() {
+			var ws = new WebSocket("ws://" + location.host + "/");
+            var vid = document.getElementById('video_con');
+            var vc = <%=current_video%>;
+            var vidlist = [
+                <%- video_list.each do |v| -%>
+                    "<%= v %>",
+                <%- end -%>
+            ];
+            var vid_count = vidlist.length;
+            
+            
+			ws.onopen = function(e) {
+				loadVideo(vc);
+				vid.currentTime = <%= video_position %>
+			};
+
+>>>>>>> 52ca908fe589b25d4348485d9bb016aa6573b457
             vid.addEventListener('ended', loadNewVideo, false);
 			
                        
             function loadVideo(n) {
+<<<<<<< HEAD
 				vid.setAttribute("src", "<%=video_list[current_video]%>");
+=======
+				vid.setAttribute("src", vidlist[n]);
+>>>>>>> 52ca908fe589b25d4348485d9bb016aa6573b457
 				vid.load();
 				vid.play();
 			};
@@ -53,6 +79,7 @@
 			 
 			function loadNewVideo() {
 				location.reload();
+<<<<<<< HEAD
 				loadVideo(<%= current_video %>);
 			}
 			 
@@ -61,6 +88,11 @@
 				vid.currentTime = <%= video_position %>
 			};
 			
+=======
+				loadVideo(<%= current_video %>)
+			}
+
+>>>>>>> 52ca908fe589b25d4348485d9bb016aa6573b457
 			}
 		</script>
         <div id="vj_info">
