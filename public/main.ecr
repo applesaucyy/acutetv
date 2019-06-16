@@ -20,14 +20,21 @@
             </div>
         </div>
         <video id="video_con" width="1280" height="720" poster="loading.png" playsinline></video>
-        <button onclick="togglePlay()" type="button">Play/Pause</button><br> 
         
+        <button onclick="togglePlay()" type="button">Play/Pause</button><br> 
 		<script>
         var vid = document.getElementById("video_con");
         
         function togglePlay() {
 			return vid.paused ? vid.play() : vid.pause();
 		};	
+        </script>
+        <input id="volume_slider" type="range" min="0" max="100" step="1" value="50" oninput="SetVol(this.value)" onchange="SetVol(this.value)"></input>
+        <script>
+            function SetVol(val) {
+				var vid = document.getElementById('video_con');
+				vid.volume = val / 100;
+			}
         </script>
         <script>
 			window.onload = function() {
