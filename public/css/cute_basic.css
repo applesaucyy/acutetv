@@ -95,6 +95,8 @@
         }
         .cute_content #video_con{
             display: inherit;
+            width: 100%;
+            height: auto;
             border: 2px solid;
             border-radius: 10px;
             box-shadow: 3px 3px 0 #000;
