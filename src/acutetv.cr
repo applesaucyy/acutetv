@@ -49,7 +49,7 @@ get "/" do
     render "public/main.ecr"
 end
 
-ws "/" do |socket|
+ws "/video" do |socket|
   SOCKETS << socket
   
   socket.on_message do |message|

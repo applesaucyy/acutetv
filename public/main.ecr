@@ -19,30 +19,24 @@
                 <a href="https://github.com/applesaucyy/acutetv" target="_blank">Repo</a>
             </div>
         </div>
-        <video id="video_con" width="1280" height="720"></video>
+        <video id="video_con" width="1280" height="720" preload="auto"></video>
+        <button onclick="togglePlay()" type="button">Play/Pause</button><br> 
+        <script>
+        var vid = document.getElementById("video_con");
+        
+        function togglePlay() {
+			return vid.paused ? vid.play() : vid.pause();
+		};	
+        </script>
         <script>
 			window.onload = function() {
-			var ws = new WebSocket("ws://" + location.host + "/");
+			var ws = new WebSocket("ws://" + location.host + "/video");
             var vid = document.getElementById('video_con');
-            var vc = <%=current_video%>;
-            var vidlist = [
-                <%- video_list.each do |v| -%>
-                    "<%= v %>",
-                <%- end -%>
-            ];
-            var vid_count = vidlist.length;
-            
-            
-			ws.onopen = function(e) {
-				loadVideo(vc);
-				vid.currentTime = <%= video_position %>
-			};
-
             vid.addEventListener('ended', loadNewVideo, false);
 			
                        
             function loadVideo(n) {
-				vid.setAttribute("src", vidlist[n]);
+				vid.setAttribute("src", "<%=video_list[current_video]%>");
 				vid.load();
 				vid.play();
 			};
@@ -53,8 +47,14 @@
 				location.reload();
 				loadVideo(<%= current_video %>)
 			}
-
+			 
+			ws.onopen = function(e) {
+				loadVideo(<%= current_video %>);
+				vid.currentTime = <%= video_position %>
+			};
+			
 			}
+				
 		</script>
         <div id="vj_info">
             <img id="c_vj_avi" src="vj_avi/avi3.png">
