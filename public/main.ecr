@@ -53,7 +53,9 @@
 			 
 			function loadNewVideo() {
 				location.reload();
-				loadVideo(<%= current_video %>);
+				vid.addEventListener('loadedmetadata', function() {
+					loadVideo(<%= current_video %>);
+				}, false);
 			}
 			 
 			ws.onopen = function(e) {
