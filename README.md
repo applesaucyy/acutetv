@@ -7,9 +7,10 @@ dumb synchronized video stream
 It _actually does_ need ffmpeg, so your server needs to have that installed. Other than that, the dependencies are in the shard.yml file.
 simply run:
 ```
+shards install
 crystal build --release src/acutetv.cr && ./acutetv
 ```
-and bada bing bada boom the shit should run!
+in the folder, and bada bing bada boom the shit should run!
 
 ## Development
 
