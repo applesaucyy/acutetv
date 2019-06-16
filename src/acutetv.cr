@@ -1,7 +1,4 @@
 require "kemal"
-require "ecr"
-require "file_utils"
-require "markdown"
 
 SOCKETS = [] of HTTP::WebSocket
 server_stime = Time.now
@@ -11,12 +8,12 @@ video_duration = [] of String
 playlist_duration = 0
 	
 Dir.children("public/videos").sort.each do |e|
-	video_list.concat(["videos/#{e}"])
+	video_list << "videos/#{e}"
 end
+
 video_list.shuffle!
-    
 video_list.each do |v|
-	video_duration.concat([`printf %.2f $(ffprobe -i "public/#{v}" -show_entries format=duration -v quiet -of csv="p=0")`.to_f.to_s])
+	video_duration << `printf %.2f $(ffprobe -i "public/#{v}" -show_entries format=duration -v quiet -of csv="p=0")`.to_f.to_s
 end
 
 video_duration.each do |vd|
