@@ -29,7 +29,8 @@
 		};	
         </script>
         <script>
-			var ws = new WebSocket("wss://" + location.host + "/video");
+			window.onload = function() {
+			var ws = new WebSocket("ws://" + location.host + "/video");
             var vid = document.getElementById('video_con');
             vid.addEventListener('ended', loadNewVideo, false);
 			
@@ -43,7 +44,8 @@
 			loadVideo(0);
 			 
 			function loadNewVideo() {
-				loadVideo(<%= current_video %>)
+				location.reload();
+				loadVideo(<%= current_video %>);
 			}
 			 
 			ws.onopen = function(e) {
@@ -51,7 +53,7 @@
 				vid.currentTime = <%= video_position %>
 			};
 			
-				
+			}
 		</script>
         <div id="vj_info">
             <img id="c_vj_avi" src="vj_avi/avi3.png">
