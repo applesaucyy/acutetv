@@ -3,7 +3,8 @@
         <link href="css/cute_basic.css?version=6" rel="stylesheet" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>/a/cute.tv</title>
+        <script src="dist/shaka-player.compiled.js"></script>
+        <title>tv/a/cute</title>
     </head>
     <body>
         
@@ -22,49 +23,68 @@
         <video id="video_con" width="1280" height="720" poster="loading.png" playsinline></video>
         
         <button onclick="togglePlay()" type="button">Play/Pause</button><br> 
-		<script>
+        <script>
         var vid = document.getElementById("video_con");
         
         function togglePlay() {
-			return vid.paused ? vid.play() : vid.pause();
-		};	
+            return vid.paused ? vid.play() : vid.pause();
+        };  
         </script>
         <input id="volume_slider" type="range" min="0" max="100" step="1" value="50" oninput="SetVol(this.value)" onchange="SetVol(this.value)"></input>
         <script>
             function SetVol(val) {
-				var vid = document.getElementById('video_con');
-				vid.volume = val / 100;
-			}
+                var vid = document.getElementById('video_con');
+                vid.volume = val / 100;
+            }
         </script>
         <script>
-			window.onload = function() {
-			var ws = new WebSocket("ws://" + location.host + "/video");
+            window.onload = function() {
+            shaka.polyfill.installAll();
+            
+            var ws = new WebSocket("ws://" + location.host + "/video");
+            
+            if(shaka.Player.isBrowserSupported()) {
+                initSystem();
+            } else {
+                alert("Your browser does not support: Shaka Player");
+            }           
+            
+            function initSystem() {
             var vid = document.getElementById('video_con');
+            var player = new shaka.Player(vid);
+            window.player = player;
+            
+            player.addEventListener('error', onErrorEvent);
             vid.addEventListener('ended', loadNewVideo, false);
-			
-                       
-            function loadVideo(n) {
-				vid.setAttribute("src", "<%=video_list[current_video]%>");
-				vid.load();
-				vid.play();
-			};
-			
-			loadVideo(0);
-			 
-			function loadNewVideo() {
-				location.reload();
-				vid.addEventListener('loadedmetadata', function() {
-					loadVideo(<%= current_video %>);
-				}, false);
-			}
-			 
-			ws.onopen = function(e) {
-				loadVideo(<%= current_video %>);
-				vid.currentTime = <%= video_position %>
-			};
-			
-			}
-		</script>
+            
+            function loadVideo() {
+                player.load("<%=video_list[current_video]%>").then(function() {
+                    vid.currentTime = <%= video_position %>;
+                    vid.play();
+                }).catch(onError);
+            };
+             
+            function onErrorEvent(event){
+                onError(event.detail)
+            }
+            
+            function onError(error){
+                console.error('Error code', error.code, 'object', error);   
+            }
+            
+            function loadNewVideo() {
+                location.reload();
+                loadVideo();
+            }
+            
+            ws.onopen = function(e) {
+                loadVideo();
+            };
+            }
+            
+            
+            }
+        </script>
         <div id="vj_info">
             <img id="c_vj_avi" src="vj_avi/avi3.png">
             <table id="vj_name">
@@ -79,8 +99,8 @@
                 <h2>Site News</h2>
                 <table id="n_post_con">
                     <tr class="n_post">
-                        <th style="display: inline-block;">#2 <p style="text-decoration: none;font-weight: normal;font-size: 14px;display: inherit;margin:0;">08 Apr 2019 (Mon)</p></th>
-                        <td>A BETA</td>
+                        <th style="display: inline-block;">#3 <p style="text-decoration: none;font-weight: normal;font-size: 14px;display: inherit;margin:0;"><%= server_stime.to_s("%Y-%m-%d / %H:%S") %></p></th>
+                        <td>Ohayou! I added a new HTML player that will hopefully fix some of the buffering issues aswell as the constant reloading. Hopefully</td>
                     </tr>
                 </table>
             </div>
