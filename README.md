@@ -21,9 +21,9 @@ This uses the [Shaka Player](https://github.com/google/shaka-player) for adaptiv
 I need all the help i can get. I suck at this.
 
 i have some things planned for a *Roadmap*:
-..* Chat
-..* File List
-..* Actual stream support (for VJs)
+  * Chat  
+  * File List   
+  * Actual stream support (for VJs)   
 
 But i'm lazy and scatterbrained, and will get to it when i get to it.
 
