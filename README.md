@@ -10,11 +10,22 @@ simply run:
 shards install
 crystal build --release src/acutetv.cr && ./acutetv
 ```
-in the folder, and bada bing bada boom the shit should run!
+in the folder, and bada bing bada boom the shit should run! The shaka player is precompiled so i dont think it should cause an issue, but if you get a JS error recompile the shaka player
+
+## Attribution
+
+This uses the [Shaka Player](https://github.com/google/shaka-player) for adaptive video streaming. 
 
 ## Development
 
 I need all the help i can get. I suck at this.
+
+i have some things planned for a *Roadmap*:
+..* Chat
+..* File List
+..* Actual stream support (for VJs)
+
+But i'm lazy and scatterbrained, and will get to it when i get to it.
 
 ## Contributing
 
